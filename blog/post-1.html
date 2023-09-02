@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blog post - 1</title>
+    <!-- Daisy and Tailwind -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesom -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="lg:container lg:mx-auto mx-5">
+      <nav
+        class="flex justify-between items-center gap-3 mt-5 flex-col md:flex-row"
+      >
+        <a href="../index.html">
+          <img src="../img/Logo.png" alt="site logo" />
+        </a>
+        <div>
+          <a
+            class="btn bg-red-500 text-white hover:text-red-500"
+            href="../index.html"
+          >
+            Home
+          </a>
+        </div>
+      </nav>
+      <div class="my-5"><hr /></div>
+    </header>
+
+    <section class="max-w-4xl mx-auto">
+      <div >
+        <img
+          src="https://www.freecodecamp.org/news/content/images/size/w2000/2023/01/15.-var-let-const.png"
+          alt=""
+          class="h-96 mb-5"
+        />
+      </div>
+      <div class="alert alert-error mb-5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span class="flex gap-5">This article is from <a href="https://www.freecodecamp.org/news/differences-between-var-let-const-javascript/" class="block">www.freecodecamp.org</a></span>
+      </div>
+      <p>
+        In JavaScript, you can declare variables with the <code>var</code>,
+        <code>let</code>, and <code>const</code> keywords. But what are the
+        differences between them? That's what I'll explain in this tutorial.
+      </p>
+      <p>
+        I have a
+        <a href="https://youtu.be/Gd_JG3e1g4A">video version of this topic</a>
+        you can check out as well. 😇
+      </p>
+      <p>
+        If you're just starting out using JavaScript, a few things you may hear
+        about these keywords are:
+      </p>
+      <ul>
+        <li>
+          <code>var</code> and <code>let</code> create variables that can be
+          reassigned another value.
+        </li>
+        <li>
+          <code>const</code> creates "constant" variables that cannot be
+          reassigned another value.
+        </li>
+        <li>
+          developers shouldn't use <code>var</code> anymore. They should use
+          <code>let</code> or <code>const</code> instead.
+        </li>
+        <li>
+          if you're not going to change the value of a variable, it is good
+          practice to use <code>const</code>.
+        </li>
+      </ul>
+      <p>
+        The first two points are likely pretty self-explanatory. But what about
+        why we shouldn't use var, or when to use let vs const? As we go through
+        this tutorial, hopefully this will all make sense to you.
+      </p>
+      <h2 id="varvsletvsconstwhatsthedifference">
+        <code>var</code> vs <code>let</code> vs <code>const</code> – What's the
+        Difference?
+      </h2>
+      <p>
+        To analyze the differences between these keywords, I'll be using three
+        factors:
+      </p>
+      <ul>
+        <li>Scope of variables</li>
+        <li>Redeclaration and reassignment</li>
+        <li>Hoisting</li>
+      </ul>
+      <p>
+        I'm also writing separate tutorials about variable scope, variable
+        hoisting, and variable redeclaration and reassignment – so you can learn
+        more about them as well. They'll be out soon. :)
+      </p>
+      <p>
+        Let's start by looking at how these factors apply to variables declared
+        with <code>var</code>.
+      </p>
+      <h2 id="howtodeclarevariableswithvarinjavascript">
+        How to Declare Variables with <code>var</code> in JavaScript
+      </h2>
+      <h3 id="thescopeofvariablesdeclaredwithvar">
+        The scope of variables declared with <code>var</code>
+      </h3>
+      <p>
+        Variables declared with <code>var</code> can have a
+        <strong>global</strong> or <strong>local</strong> scope. Global scope is
+        for variables declared outside functions, while local scope is for
+        variables declared inside functions.
+      </p>
+      <p>Let's see some examples, starting from global scope:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        <span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> square <span class="token operator">=</span> number <span class="token operator">*</span> number
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 50</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 2500</span>
+        </code></pre>
+      <p>
+        The <code>number</code> variable has a global scope – it's declared
+        outside functions in the global space –&nbsp;so you can access it
+        everywhere (inside and outside functions).
+      </p>
+      <p>Let's see an example of local scope:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+          <span class="token keyword">var</span> square <span class="token operator">=</span> number <span class="token operator">*</span> number
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 2500</span>
+        
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+        <span class="token comment">// ReferenceError: number is not defined</span>
+        </code></pre>
+      <p>
+        Here, we declared the <code>number</code> variable in the function
+        <code>print</code>, so it has a local scope. This means that the
+        variable can only be accessed inside that function. Any attempt to
+        access the variable outside the function where it was declared will
+        result in a <strong>variable is not defined</strong> reference error.
+      </p>
+      <h3 id="howtoredeclareandreassignvariablesdeclaredwithvar">
+        How to redeclare and reassign variables declared with <code>var</code>
+      </h3>
+      <p>
+        Variables declared with <code>var</code> can be redeclared and
+        reassigned. I'll explain what I mean with examples.
+      </p>
+      <p>Here's how to declare a variable with <code>var</code>:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        </code></pre>
+      <p>
+        You have the <code>var</code> keyword, the name of the variable
+        <code>number</code>, and an initial value <strong>50</strong>. If an
+        initial value is not provided, the default value will be
+        <strong>undefined</strong>:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">var</span> number
+        
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+        <span class="token comment">// undefined</span>
+        </code></pre>
+      <p>
+        The <code>var</code> keyword allows for redeclaration. Here's an
+        example:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 50</span>
+        
+        <span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">100</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 100</span>
+        </code></pre>
+      <p>
+        As you can see, we have redeclared the variable
+        <code>number</code> using the <code>var</code> keyword and an initial
+        value of <strong>100</strong>.
+      </p>
+      <p>
+        The <code>var</code> keyword also allows for reassignment. In the code
+        <code>var number = 50</code>, we assigned the <strong>50</strong> value
+        to <code>number</code>. We can reassign another value anywhere in the
+        code since it was declared with <code>var</code>. Here's what I mean:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 50</span>
+        
+        number <span class="token operator">=</span> <span class="token number">100</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 100</span>
+        
+        number <span class="token operator">=</span> <span class="token number">200</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 200</span>
+        </code></pre>
+      <p>
+        Here, we're not redeclaring – rather, we're reassigning. After declaring
+        the first time with an initial value of <strong>50</strong>, we reassign
+        a new value of <strong>100</strong> and later on with a new value of
+        <strong>200</strong>.
+      </p>
+      <h3 id="howtohoistvariablesdeclaredwithvar">
+        How to hoist variables declared with <code>var</code>
+      </h3>
+      <p>
+        Variables declared with <code>var</code> are hoisted to the top of their
+        global or local scope, which makes them accessible before the line they
+        are declared. Here's an example:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// undefined</span>
+        
+        <span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 50</span>
+        </code></pre>
+      <p>
+        The <code>number</code> variable here has a global scope. Since it is
+        declared with <code>var</code>, the variable is hoisted. This means that
+        we can access the variable before the line where it was declared without
+        errors.
+      </p>
+      <p>
+        But the variable is hoisted with a default value of
+        <strong>undefined</strong>. So that's the value returned from the
+        variable (until the line where the variable is declared with an initial
+        value gets executed).
+      </p>
+      <p>Let's see a local scope example:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> square1 <span class="token operator">=</span> number <span class="token operator">*</span> number
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square1<span class="token punctuation">)</span>
+        
+          <span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+          <span class="token keyword">var</span> square2 <span class="token operator">=</span> number <span class="token operator">*</span> number
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square2<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// NaN</span>
+        <span class="token comment">// 2500</span>
+        </code></pre>
+      <p>
+        In the <code>print</code> function, <code>number</code> has a local
+        scope. Due to hoisting, we can access the <code>number</code> variable
+        before the line of declaration.
+      </p>
+      <p>
+        As we see in <code>square1</code>, we assign
+        <strong>number * number</strong>. Since <code>number</code> is hoisted
+        with a default value of <strong>undefined</strong>,
+        <code>square1</code> will be
+        <strong>undefined * undefined</strong> which results in
+        <strong>NaN</strong>.
+      </p>
+      <p>
+        After the line of declaration with an initial value is executed,
+        <code>number</code> will have a value of <strong>50</strong>. So in
+        <code>square2</code>, <strong>number * number</strong> will be
+        <strong>50 * 50</strong> which results in <strong>2500</strong>.
+      </p>
+      <p>
+        There are some problems with <code>var</code>, which we'll discuss at
+        the end. Just know that it's generally not advisable to use it in your
+        modern JavaScript projects.
+      </p>
+      <h2 id="howtodeclarevariableswithletinjavascript">
+        How to Declare Variables with <code>let</code> in JavaScript
+      </h2>
+      <h3 id="thescopeofvariablesdeclaredwithlet">
+        The scope of variables declared with <code>let</code>
+      </h3>
+      <p>
+        Variables declared with <code>let</code> can have a
+        <strong>global</strong>, <strong>local</strong>, or
+        <strong>block scope</strong>. Block scope is for variables declared in a
+        block. A block in JavaScript involves opening and closing curly braces:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token punctuation">{</span>
+          <span class="token comment">// a block</span>
+        <span class="token punctuation">}</span>
+        </code></pre>
+      <p>
+        You can find blocks in <code>if</code>, <code>loop</code>,
+        <code>switch</code>, and a couple of other statements. Any variables
+        declared in such blocks with the <code>let</code> keyword will have a
+        block scope. Also, you can't access these variables outside the block.
+        Here's an example showing a global, local, and block scope:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        <span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> square <span class="token operator">=</span> number <span class="token operator">*</span> number
+        
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">&lt;</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> largerNumber <span class="token operator">=</span> <span class="token number">80</span>
+            <span class="token keyword">let</span> anotherLargerNumber <span class="token operator">=</span> <span class="token number">100</span>
+        
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+        
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>largerNumber<span class="token punctuation">)</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>anotherLargerNumber<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// 2500</span>
+        <span class="token comment">// 80</span>
+        <span class="token comment">// ReferenceError: anotherLargerNumber is not defined</span>
+        </code></pre>
+      <p>
+        In this example, we have a global scope variable <code>number</code> and
+        a local scope variable <code>square</code>. There's also block scope
+        variable <code>anotherLargerNumber</code> because it is declared with
+        <code>let</code> in a block.
+      </p>
+      <p>
+        <code>largerNumber</code>, on the other hand – though declared in a
+        block – does not have a block scope because it is declared with
+        <code>var</code>. So <code>largerNumber</code> has a local scope as it
+        is declared in the function <code>print</code>.
+      </p>
+      <p>
+        We can access <code>number</code> everywhere. We can only access
+        <code>square</code> and <code>largerNumber</code> in the function
+        because they have local scope. But accessing
+        <code>anotherLargerNumber</code> outside the block throws an
+        <strong>anotherLargerNumber is not defined</strong> error.
+      </p>
+      <h3 id="howtoredeclareandreassignvariablesdeclaredwithlet">
+        How to redeclare and reassign variables declared with <code>let</code>
+      </h3>
+      <p>
+        Just like <code>var</code>, variables declared with <code>let</code> can
+        be reassigned to other values, but they cannot be redeclared. Let's see
+        a reassignment example:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 50</span>
+        
+        number <span class="token operator">=</span> <span class="token number">100</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token comment">// 100</span>
+        </code></pre>
+      <p>
+        Here, we reassigned another value <strong>100</strong> after the initial
+        declaration of <strong>50</strong>.
+      </p>
+      <p>
+        But redeclaring a variable with <code>let</code> will throw an error:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        <span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">100</span>
+        <span class="token comment">// SyntaxError: Identifier 'number' has already been declared</span>
+        </code></pre>
+      <p>
+        You see we get a syntax error:
+        <strong>Identifier 'number' has already been declared</strong>.
+      </p>
+      <h3 id="howtohoistvariablesdeclaredwithlet">
+        How to hoist variables declared with <code>let</code>
+      </h3>
+      <p>
+        Variables declared with <code>let</code> are hoisted to the top of their
+        global, local, or block scope, but their hoisting is a little different
+        from the one with <code>var</code>.
+      </p>
+      <p>
+        <code>var</code> variables are hoisted with a default value of
+        <strong>undefined</strong>, which makes them accessible before their
+        line of declaration (as we've seen above).
+      </p>
+      <p>
+        But, <code>let</code> variables are hoisted without a default
+        initialization. So when you try to access such variables, instead of
+        getting <strong>undefined</strong>, or
+        <strong>variable is not defined</strong> error, you get
+        <strong>cannot access variable before initialization</strong>. Let's see
+        an example:
+      </p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+        <span class="token comment">// ReferenceError: Cannot access 'number' before initialization</span>
+        
+        <span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        </code></pre>
+      <p>
+        Here, we have a global variable, <code>number</code> declared with
+        <code>let</code>. By trying to access this variable before the line of
+        declaration, we get
+        <strong
+          >ReferenceError: Cannot access 'number' before initialization</strong
+        >.
+      </p>
+      <p>Here's another example with a local scope variable:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> square <span class="token operator">=</span> number <span class="token operator">*</span> number
+        
+          <span class="token keyword">let</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// ReferenceError: Cannot access 'number' before initialization</span>
+        </code></pre>
+      <p>
+        Here we have a local scope variable, <code>number</code>, declared with
+        <code>let</code>. By accessing it before the line of declaration again,
+        we get the
+        <strong>cannot access 'number' before initialization</strong> reference
+        error
+      </p>
+      <h2 id="howtodeclarevariableswithconstinjavascript">
+        How to Declare Variables with <code>const</code> in JavaScript
+      </h2>
+      <h3 id="thescopeofvariablesdeclaredwithconst">
+        The scope of variables declared with <code>const</code>
+      </h3>
+      <p>
+        Variables declared with <code>const</code> are similar to
+        <code>let</code> in regards to <strong>scope</strong>. Such variables
+        can have a <strong>global</strong>, <strong>local</strong>, or
+        <strong>block</strong> scope.
+      </p>
+      <p>Here is an example:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">const</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        <span class="token keyword">function</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> square <span class="token operator">=</span> number <span class="token operator">*</span> number
+        
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">&lt;</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> largerNumber <span class="token operator">=</span> <span class="token number">80</span>
+            <span class="token keyword">const</span> anotherLargerNumber <span class="token operator">=</span> <span class="token number">100</span>
+        
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>square<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+        
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>largerNumber<span class="token punctuation">)</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>anotherLargerNumber<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// 2500</span>
+        <span class="token comment">// 80</span>
+        <span class="token comment">// ReferenceError: anotherLargerNumber is not defined</span>
+        </code></pre>
+      <p>
+        This is from our previous example, but I've replaced
+        <code>let</code> with <code>const</code>. As you can see here, the
+        <code>number</code> variable has a global scope, <code>square</code> has
+        a local scope (declared in the <code>print</code> function), and
+        <code>anotherLargeNumber</code> has a block scope (declared with
+        <code>const</code>).
+      </p>
+      <p>
+        There's also <code>largeNumber</code>, declared in a block. But because
+        it is with <code>var</code>, the variable only has a local scope.
+        Therefore, it can be accessed outside the block.
+      </p>
+      <p>
+        Because <code>anotherLargeNumber</code> has a block scope, accessing it
+        outside the block throws an
+        <strong>anotherLargerNumber is not defined</strong>.
+      </p>
+      <h3 id="howtoredeclareandreassignvariablesdeclaredwithconst">
+        How to redeclare and reassign variables declared with <code>const</code>
+      </h3>
+      <p>
+        In this regard, <code>const</code> is different from
+        <code>var</code> and <code>let</code>. <code>const</code> is used for
+        declaring <strong>constant</strong> variables – which are variables with
+        values that cannot be changed. So such variables cannot be redeclared,
+        and neither can they be reassigned to other values. Attempting such
+        would throw an error.
+      </p>
+      <p>Let's see an example with redeclaration:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">const</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        <span class="token keyword">const</span> number <span class="token operator">=</span> <span class="token number">100</span>
+        
+        <span class="token comment">// SyntaxError: Identifier 'number' has already been declared</span>
+        </code></pre>
+      <p>
+        Here, you can see the
+        <strong>Identifier has already been declared</strong> syntax error.
+      </p>
+      <p>Now, let's see an example with reassignment:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js"><span class="token keyword">const</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        
+        number <span class="token operator">=</span> <span class="token number">100</span>
+        
+        <span class="token comment">// TypeError: Assignment to constant variable</span>
+        </code></pre>
+      <p>
+        Here, you can see the
+        <strong>Assignment to constant variable</strong> type error.
+      </p>
+      <h3 id="howtohoistvariablesdeclaredwithconst">
+        How to hoist variables declared with <code>const</code>
+      </h3>
+      <p>
+        Variables declared with <code>const</code>, just like <code>let</code>,
+        are hoisted to the top of their global, local, or block scope – but
+        without a default initialization.
+      </p>
+      <p>
+        <code>var</code> variables, as you've seen earlier, are hoisted with a
+        default value of <strong>undefined</strong> so they can be accessed
+        before declaration without errors. Accessing a variable declared with
+        <code>const</code> before the line of declaration will throw a
+        <strong>cannot access variable before initialization</strong> error.
+      </p>
+      <p>Let's see an example:</p>
+      <pre
+        class="language-js"
+        tabindex="0"
+      ><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+        <span class="token comment">// ReferenceError: Cannot access 'number' before initialization</span>
+        
+        <span class="token keyword">const</span> number <span class="token operator">=</span> <span class="token number">50</span>
+        </code></pre>
+      <p>
+        Here, <code>number</code> is a globally scoped variable declared with
+        <code>const</code>. By trying to access this variable before the line of
+        declaration, we get
+        <strong
+          >ReferenceError: Cannot access 'number' before initialization</strong
+        >. The same will occur if it was a locally scoped variable.
+      </p>
+      <p>
+        Here's an article to learn more about
+        <a
+          href="https://www.freecodecamp.org/news/javascript-let-and-const-hoisting/"
+          >Hoisting in JavaScript with let and const – and How it Differs from
+          var</a
+        >.
+      </p>
+      <h2 id="wrapup">Wrap up</h2>
+      <p>
+        Here's a table summary showing the differences between these keywords:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Scope</th>
+            <th>Redeclaration &amp; Reassignment</th>
+            <th>Hoisting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>var</code></td>
+            <td>Global, Local</td>
+            <td>yes &amp; yes</td>
+            <td>yes, with default value</td>
+          </tr>
+          <tr>
+            <td><code>let</code></td>
+            <td>Global, Local, Block</td>
+            <td>no &amp; yes</td>
+            <td>yes, without default value</td>
+          </tr>
+          <tr>
+            <td><code>const</code></td>
+            <td>Global, Local, Block</td>
+            <td>no &amp; no</td>
+            <td>yes, without default value</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        These factors I've explained, play a role in determining how you declare
+        variables in JavaScript.
+      </p>
+      <p>
+        If you never want a variable to change, <code>const</code> is the
+        keyword to use.
+      </p>
+      <p>If you want to reassign values:</p>
+      <ul>
+        <li>
+          and you want the hoisting behavior, <code>var</code> is the keyword to
+          use
+        </li>
+        <li>if you don't want it, <code>let</code> is the keyword for you</li>
+      </ul>
+      <p>
+        The hoisting behavior can cause unexpected bugs in your application.
+        That's why developers are generally advised to avoid
+        <code>var</code> and stick to <code>let</code> and <code>cost</code>.
+      </p>
+      <p>I hope you learned something from this article.</p>
+      <!--kg-card-end: markdown-->
+    </section>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blog post - 2</title>
+    <!-- Daisy and Tailwind -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesom -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="lg:container lg:mx-auto mx-5">
+      <nav
+        class="flex justify-between items-center gap-3 mt-5 flex-col md:flex-row"
+      >
+        <a href="../index.html">
+          <img src="../img/Logo.png" alt="site logo" />
+        </a>
+        <div>
+          <a
+            class="btn bg-red-500 text-white hover:text-red-500"
+            href="../index.html"
+          >
+            Home
+          </a>
+        </div>
+      </nav>
+      <div class="my-5"><hr /></div>
+    </header>
+
+    <section class="max-w-4xl mx-auto">
+      <div>
+        <img
+          src="https://media.licdn.com/dms/image/D4E22AQG_v5i5A5D4GA/feedshare-shrink_800/0/1682688392027?e=1696464000&v=beta&t=_4SboVmQ5cg9SCxKTWoz8MZCZIm_4UXzxLi41oL9gbw"
+          alt=""
+          class="h-96 mb-5"
+        />
+      </div>
+      <div class="alert alert-error mb-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span class="flex gap-5"
+          >This article is from
+          <a
+            href="https://www.freecodecamp.org/news/what-is-a-rest-api/"
+            class="block"
+            >www.freecodecamp.org</a
+          ></span
+        >
+      </div>
+
+      <!-- Article -->
+      <section class="post-content ">
+                            
+        <p>An API (short for Application Programming Interface) allows for two or more applications to communicate with one another and send data back and forth.</p>
+        <p>APIs operated based on a standardized set of rules and they're an integral component of modern-day software development.</p>
+        <p>There are different API styles, and each one has its unique architecture. One of the most common styles is REST.</p>
+        <p>In this article, you will learn the basics of REST APIs. You will see an overview of what they are and how they work. You will also learn what makes an API RESTful.</p>
+        <p>Let's get into it!</p>
+        <h2 id="whatisarestapi">What Is A REST API?</h2>
+        <p>REST (short for REpresentational State Transfer) is a software architectural style created by computer scientist Roy Fielding in 2000.</p>
+        <p>With REST APIs, a client requests a resource. Then the server responds to the client with a representation of the current state of that resource and all relevant information about it in a standardized format, such as JSON or XML.</p>
+        <h2 id="anoverviewofrestapiconcepts">An Overview of REST API Concepts</h2>
+        <p>In the previous section, I mentioned the terms client, resource, and server. What do they mean?</p>
+        <p>A <strong>client</strong> is a program running on a user's computer.</p>
+        <p>This program could be a web browser, which initiates communication and makes requests to the API.</p>
+        <p>The role of the client is only to retrieve or modify information within the application.</p>
+        <p>A <strong>resource</strong> is any information the API can provide – a document, a text file, an image, a video, or any other object.</p>
+        <p>Each resource has a unique identifier, known as the Universal Resource Identifier (or URI), which is a string that refers to that specific resource.</p>
+        <p>A <strong>server</strong> is a system that stores the resource the client is requesting.</p>
+        <p>A server's role is to listen for and receive client requests for its resources and respond to them with the requested information.</p>
+        <p>The server sends back a representation of the resource's state and does not grant full access to the client.</p>
+        <h2 id="howdoesarestapiwork">How Does A REST API Work?</h2>
+        <p>A client sends an HTTP request to the server to perform a CRUD operation. CRUD is an acronym for <code>Create</code>, <code>Read</code>, <code>Update</code>, and <code>Delete</code>.</p>
+        <p>The server responds with a resource in a standardized format such as JSON (JavaScript Object Notation) or XML, with JSON being the most popular format used today.</p>
+        <h3 id="anoverviewofrestapirequests">An Overview of REST API Requests</h3>
+        <p>A REST API request needs to include the following:</p>
+        <ul>
+        <li>An operation</li>
+        <li>An endpoint</li>
+        <li>The parameters/body</li>
+        <li>HTTP headers</li>
+        </ul>
+        <p>Firstly, each request needs to include the <strong>operation/action</strong> you want the server to perform on the resource.</p>
+        <p>In the section above, I mentioned that the client sends a request to the server to perform a CRUD operation.</p>
+        <p>Each CRUD operation is equivalent to an HTTP method/verb that defines the operation:</p>
+        <ul>
+        <li>The <code>Create</code> operation's equivalent is a <code>POST</code> request which indicates that you want to create a new resource.</li>
+        <li>The <code>Read</code> operation's equivalent is a <code>GET</code> request which indicates that you want to retrieve a resource.</li>
+        <li>The <code>Update</code> operation's equivalent is a <code>PUT</code> request which indicates that you want to edit or update a specific existing resource.</li>
+        <li>The <code>Delete</code> operation's equivalent is a <code>DELETE</code> request which indicates that you want to delete a specific resource.</li>
+        </ul>
+        <p>Then, the request must also include an <strong>endpoint</strong>.</p>
+        <p>An endpoint is a URL (short for Uniform Resource Locator) that contains the URI (Uniform Resource Identifier), which is the location where the API can find and interact with the specific resource.</p>
+        <p>You can view a list of endpoints in the documentation for the specific API you are using.</p>
+        <p>For example, when using <a href="https://developer.spotify.com/documentation/web-api/">Spotify's API</a>, the endpoint to get a <a href="https://developer.spotify.com/console/get-artist-albums/">specific artist's album</a> looks something like the following:</p>
+        <pre><code>https://api.spotify.com/v1/artists/{id}/albums
+        </code></pre>
+        <p>The request also optionally includes the <strong>parameters/body</strong>, which is any additional data and messages you might send to the server.</p>
+        <p>Lastly, the request also includes HTTP headers, which are authentication data such as an API key.</p>
+        <h3 id="anoverviewofrestapiresponses">An Overview of REST API Responses</h3>
+        <p>After receiving the request, the server will return information about the requested resource.</p>
+        <p>The response is a representation of the state of the requested resource – not the resource itself.</p>
+        <p>Typically, the response is in the form of JSON data – a readable format for the client that made the request.</p>
+        <p>There is also an appropriate HTTP status code sent back in the response header to let the client know if the operation was successful or not.</p>
+        <p>Some of the most commonly used status codes are the following:</p>
+        <ul>
+        <li><code>200 OK</code> means the request was successful</li>
+        <li><code>201 Created</code> means the request was successful, and a resource got created</li>
+        <li><code>204 No Content</code> means the request was successful, but there is no need to return a message body</li>
+        <li><code>400 Bad Request</code> means the server cannot process the request due to an error from the client's side</li>
+        <li><code>401 Unauthorized</code> means the server cannot process the request due to a lack of authentication credentials</li>
+        <li><code>403 Forbidden</code> means the client doesn't have permission to access the resource</li>
+        <li><code>404 Not Found</code> means the server cannot find the resource (this may be because it got deleted)</li>
+        <li><code>500 Internal Server Error</code> means the server encountered an unexpected error</li>
+        </ul>
+        <h2 id="whatmakesanapirestful">What Makes An API RESTful?</h2>
+        <p>For an API to be considered RESTful, it should follow certain best practices, also known as architectural constraints.</p>
+        <p>The six constraints of the REST architecture are:</p>
+        <ul>
+        <li>Client-server separation</li>
+        <li>A uniform interface</li>
+        <li>Stateless</li>
+        <li>Layered system</li>
+        <li>Cacheable</li>
+        <li>Executable code</li>
+        </ul>
+        <p>Let's see each one in a bit more detail in the following sections.</p>
+        <h3 id="clientserverseparation">Client-Server separation</h3>
+        <p>In REST API architecture, the client and server must work independently.</p>
+        <p>A client only initiates communication and sends a request to the server, and a server waits for requests from a client and responds appropriately.</p>
+        <p>This separation of concerns ensures system reliability and scalability.</p>
+        <p>When you separate the client from the server, you can change the client-side code without affecting the server. And you can modify the resources stored in the server without affecting the client.</p>
+        <h3 id="auniforminterface">A Uniform Interface</h3>
+        <p>All requests and responses must follow a format and protocol – there needs to be a standardized common language.</p>
+        <p>This common language is HTTP (short for HyperText Transfer Protocol).</p>
+        <p>Note that HTTP was not designed for REST APIs – REST adopted the communication protocol.</p>
+        <h3 id="stateless">Stateless</h3>
+        <p>REST APIs are stateless, meaning the API treats each request from a client independently, and the request needs to include all the necessary information.</p>
+        <p>The server interprets each request as brand new – that is, it does not remember past information about the client. For example, it doesn't remember if the client has requested the same resource before.</p>
+        <p>This constraint enhances performance, scalability, and reliability.</p>
+        <h3 id="layeredsystem">Layered System</h3>
+        <p>The RESTful architecture has a layered structure, and each layer works independently – requests and responses go through separate hierarchical layers.</p>
+        <p>The client and server don't know whether they are communicating with an intermediary. There can be several other servers in the middle sitting between them that don't affect client-server interactions.</p>
+        <p>These layers can add security and manage and distribute traffic, which improves system security and scalability.</p>
+        <h3 id="cacheable">Cacheable</h3>
+        <p>REST APIs are designed with caching in mind. The response from the server should indicate whether a resource is cacheable or not.</p>
+        <p>If the resource is cacheable, the client can store and reuse frequently accessed data instead of requesting it again and again from the server.</p>
+        <p>When a resource is cacheable, it lowers a page's load time since the client fetches data from local storage and makes fewer calls to the server. The server, in turn, has less latency.</p>
+        <h3 id="executablecode">Executable Code</h3>
+        <p>The final constraint is optional.</p>
+        <p>Instead of sending a representation of a static resource in JSON, the server may return some computer code in the form of a script that the client can execute.</p>
+        <p>That said, an API is RESTful even if it doesn't provide executable code.</p>
+        <h2 id="conclusion">Conclusion</h2>
+        <p>Hopefully, this article was helpful and gave you insight into what a REST API is, how it works, and what makes an API RESTful.</p>
+        <p>If you want to dive in more deeply to using REST APIs, here's a <a href="https://www.freecodecamp.org/news/how-to-use-rest-api/">guide to help you get started</a>.</p>
+        <p>And then if you want to try designing your own REST API, this <a href="https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/">full handbook will walk you through the process</a>.</p>
+        <p>Thank you for reading, and happy coding!</p>
+        <!--kg-card-end: markdown-->
+        
+                                </section>
+    </section>
+  </body>
+</html>

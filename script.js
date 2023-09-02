@@ -1,6 +1,21 @@
 // Elements
 const categoryContainer = document.getElementById("category");
 const cardContainer = document.getElementById("card-container");
+const errorSection = document.getElementById("error-section");
+
+//
+function convertSeconds(totalMinutes) {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  // return { hours, minutes };
+  return `${hours}hrs ${minutes} min ago`;
+}
+
+// const totalMinutes = 16278;
+// const time = convertSeconds(totalMinutes);
+// console.log(`${time.hours}hrs ${time.minutes} min ago`);
+
+console.log(convertSeconds(16278));
 
 async function getData() {
   const res = await fetch(
@@ -15,20 +30,38 @@ async function getData() {
       `https://openapi.programming-hero.com/api/videos/category/${id}`
     );
     const data = await res.json();
-    data.data.forEach((content) => {
-      console.log(content);
+
+    if (Object.keys(data.data).length === 0) {
+      cardContainer.innerHTML = "";
+      errorSection.innerHTML = "";
       const div = document.createElement("div");
-      div.classList.add(
-        "max-w-[312px]",
-        "max-h[315px]",
-        "border",
-        "border-sky-200"
-      );
+      div.classList.add("flex", "flex-col", "items-center", "gap-5");
       div.innerHTML = `
+      <div>
+      <img src="./img/Icon.png" alt="" />
+    </div>
+    <h1 class="font-bold text-2xl">
+      Oops!! Sorry, There is no <br />
+      content here
+    </h1>
+      `;
+      errorSection.appendChild(div);
+    } else if (Object.keys(data.data).length >= 1) {
+      cardContainer.innerHTML = "";
+      errorSection.innerHTML = "";
+      data.data.forEach((content) => {
+        const div = document.createElement("div");
+        div.classList.add(
+          "max-w-[312px]",
+          "max-h[315px]"
+        );
+        div.innerHTML = `
       <div class="relative w-[300px]">
       <img src="${content.thumbnail}" class='h-[200px] w-full' />
-      <p class="absolute right-0 top-36 text-white bg-slate-900 p-1 rounded-md">${
+      <p class="absolute right-0 top-36 text-white bg-slate-900 p-1 rounded-md mr-3">${
         content.others.posted_date
+          ? convertSeconds(content.others.posted_date)
+          : ""
       }</p>
     </div>
     <div class="flex items-center gap-2 mt-5">
@@ -50,10 +83,11 @@ async function getData() {
     <p class="mt-1 text-sm">${content.others.views} views</p>
       `;
 
-      cardContainer.appendChild(div);
-    });
+        cardContainer.appendChild(div);
+      });
+    }
   }
-  // handleBtn(1000);
+  handleBtn(1000);
 
   // Loop through the categories and create buttons
   data.data.forEach((category) => {
@@ -63,16 +97,16 @@ async function getData() {
     // Create a button with an event listener
     const button = document.createElement("button");
     button.setAttribute("id", "tab-btn");
-    button.classList.add("btn")
+    button.classList.add("btn");
 
     button.textContent = categoryName;
     button.addEventListener("click", function () {
       const buttons = document.querySelectorAll("#tab-btn");
       buttons.forEach((btn) => {
-        btn.classList.remove("bg-red-500");
+        btn.classList.remove("bg-red-500", "text-white");
       });
 
-      button.classList.add("bg-red-500");
+      button.classList.add("bg-red-500", "text-white");
       handleBtn(category.category_id);
     });
 
