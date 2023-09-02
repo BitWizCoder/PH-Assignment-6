@@ -7,15 +7,8 @@ const errorSection = document.getElementById("error-section");
 function convertSeconds(totalMinutes) {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
-  // return { hours, minutes };
   return `${hours}hrs ${minutes} min ago`;
 }
-
-// const totalMinutes = 16278;
-// const time = convertSeconds(totalMinutes);
-// console.log(`${time.hours}hrs ${time.minutes} min ago`);
-
-console.log(convertSeconds(16278));
 
 async function getData() {
   const res = await fetch(
@@ -51,10 +44,7 @@ async function getData() {
       errorSection.innerHTML = "";
       data.data.forEach((content) => {
         const div = document.createElement("div");
-        div.classList.add(
-          "max-w-[312px]",
-          "max-h[315px]"
-        );
+        div.classList.add("max-w-[312px]", "max-h[315px]");
         div.innerHTML = `
       <div class="relative w-[300px]">
       <img src="${content.thumbnail}" class='h-[200px] w-full' />
@@ -116,3 +106,61 @@ async function getData() {
 }
 
 getData();
+
+// Sort cards
+const parseView = (str) => {
+  const multiplier = str.endsWith("k") ? 1000 : 1;
+  return parseInt(str.replace(/k/g, "")) * multiplier;
+};
+
+const sortByViews = async () => {
+  try {
+    const response = await fetch(
+      "https://openapi.programming-hero.com/api/videos/category/1000"
+    );
+    if (!response.ok) {
+      throw new Error("Network request failed");
+    }
+
+    const { data } = await response.json();
+
+    data.sort((a, b) => parseView(b.others.views) - parseView(a.others.views));
+
+    cardContainer.innerHTML = "";
+
+    data.forEach((content) => {
+      const div = document.createElement("div");
+      div.classList = "card w-[312px] h-[325px] bg-base-100 shadow-xl";
+
+      div.innerHTML = `
+        <div class="relative w-[300px]">
+          <img src="${content.thumbnail}" class="h-[200px] w-full" />
+          <p class="absolute right-0 top-36 text-white bg-slate-900 p-1 rounded-md mr-3">${
+            content.others.posted_date
+              ? convertSeconds(content.others.posted_date)
+              : ""
+          }</p>
+        </div>
+        <div class="flex items-center gap-2 mt-5">
+          <img src="${
+            content.authors[0].profile_picture
+          }" alt="avatar" class="w-10 h-10 rounded-full" />
+          <p class="font-semibold text-base">${content.title}</p>
+        </div>
+        <p class="mt-3 text-sm">
+          ${content.authors[0].profile_name}
+          ${
+            content.authors[0].verified
+              ? '<img src="./img/blue-tick.svg" alt="" class="inline-block" />'
+              : ""
+          }
+        </p>
+        <p class="mt-1 text-sm">${content.others.views} views</p>
+      `;
+
+      cardContainer.appendChild(div);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
