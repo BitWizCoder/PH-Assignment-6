@@ -130,7 +130,7 @@ const sortByViews = async () => {
 
     data.forEach((content) => {
       const div = document.createElement("div");
-      div.classList = "card w-[312px] h-[325px] bg-base-100 shadow-xl";
+      div.classList = "card w-[312px] h-[325px] bg-base-100";
 
       div.innerHTML = `
         <div class="relative w-[300px]">
